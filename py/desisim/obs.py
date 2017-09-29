@@ -30,7 +30,8 @@ from .simexp import simulate_spectra
 
 def new_exposure(program, nspec=5000, night=None, expid=None, tileid=None,
                  seed=None, obsconditions=None, specify_targets=dict(), testslit=False, exptime=None,
-                 arc_lines_filename=None, flat_spectrum_filename=None):
+                 arc_lines_filename=None, flat_spectrum_filename=None,
+                 overwrite=False):
     """
     Create a new exposure and output input simulation files.
     Does not generate pixel-level simulations or noisy spectra.
@@ -53,6 +54,7 @@ def new_exposure(program, nspec=5000, night=None, expid=None, tileid=None,
         * testslit : simulate test slit if True, default False; only for arc/flat
         * arc_lines_filename : use alternate arc lines filename (used if program="arc")
         * flat_spectrum_filename : use alternate flat spectrum filename (used if program="flat")
+        * overwrite : optionally clobber existing files
 
     Writes:
         * $DESI_SPECTRO_SIM/$PIXPROD/{night}/fibermap-{expid}.fits
@@ -118,7 +120,7 @@ def new_exposure(program, nspec=5000, night=None, expid=None, tileid=None,
         wave, phot, fibermap = desisim.simexp.simarc(arcdata, nspec=nspec, testslit=testslit)
 
         header['EXPTIME'] = exptime
-        desisim.io.write_simspec_arc(outsimspec, wave, phot, header, fibermap=fibermap)
+        desisim.io.write_simspec_arc(outsimspec, wave, phot, header, fibermap=fibermap, overwrite=overwrite)
 
         fibermap.meta['NIGHT'] = night
         fibermap.meta['EXPID'] = expid
@@ -139,7 +141,7 @@ def new_exposure(program, nspec=5000, night=None, expid=None, tileid=None,
         header['EXPTIME'] = exptime
         header['FLAVOR'] = 'flat'
         desisim.io.write_simspec(sim, truth=None, fibermap=fibermap, obs=None,
-            expid=expid, night=night, header=header)
+            expid=expid, night=night, header=header, overwrite=overwrite)
 
         fibermap.meta['NIGHT'] = night
         fibermap.meta['EXPID'] = expid
@@ -201,7 +203,7 @@ def new_exposure(program, nspec=5000, night=None, expid=None, tileid=None,
         )
     hdr['DATE-OBS'] = (time.strftime('%FT%T', dateobs), 'Start of exposure')
 
-    simfile = io.write_simspec(sim, meta, fibermap, obsconditions, expid, night, header=hdr)
+    simfile = io.write_simspec(sim, meta, fibermap, obsconditions, expid, night, header=hdr, overwrite=overwrite)
 
     #- Write fibermap to $DESI_SPECTRO_SIM/$PIXPROD not $DESI_SPECTRO_DATA
     fiberfile = io.findfile('simfibermap', night, expid)
@@ -444,6 +446,7 @@ def update_obslog(obstype='science', program='DARK', expid=None, dateobs=None,
     INSERT OR REPLACE INTO obslog(expid,dateobs,night,obstype,program,tileid,ra,dec)
     VALUES (?,?,?,?,?,?,?,?)
     """
+    import pdb ; pdb.set_trace()
     db.execute(insert, (expid, time.mktime(dateobs), night, obstype.upper(), program.upper(), tileid, ra, dec))
     db.commit()
 
