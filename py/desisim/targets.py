@@ -306,7 +306,7 @@ def get_targets(nspec, program, tileid=None, seed=None, specify_targets=dict(), 
 
         elif objtype == 'BGS':
             from desisim.templates import BGS
-            bgs = BGS(wave=wave)
+            bgs = BGS(wave=wave, **obj_kwargs)
             simflux, wave1, meta1 = bgs.make_templates(nmodel=nobj, seed=seed, **obj_kwargs)
             fibermap['DESI_TARGET'][ii] = desi_mask.BGS_ANY
             fibermap['BGS_TARGET'][ii] = bgs_mask.BGS_BRIGHT

@@ -818,7 +818,7 @@ class ELG(GALAXY):
                        minoiiflux=0.0, sne_rfluxratiorange=(0.1, 1.0), redshift=None,
                        mag=None, vdisp=None, seed=None, input_meta=None, nocolorcuts=False,
                        nocontinuum=False, agnlike=False, novdisp=False, restframe=False,
-                       verbose=False):
+                       verbose=False, **kwargs):
         """Build Monte Carlo ELG spectra/templates.
 
         See the GALAXY.make_galaxy_templates function for documentation on the
@@ -864,7 +864,7 @@ class BGS(GALAXY):
 
     def __init__(self, minwave=3600.0, maxwave=10000.0, cdelt=0.2, wave=None,
                  add_SNeIa=False, normfilter='decam2014-r', colorcuts_function=None,
-                 baseflux=None, basewave=None, basemeta=None):
+                 baseflux=None, basewave=None, basemeta=None, **kwargs):
         """Initialize the BGS class.  See the GALAXY.__init__ method for documentation
          on the arguments plus the inherited attributes.
 
@@ -899,7 +899,7 @@ class BGS(GALAXY):
                        minhbetaflux=0.0, sne_rfluxratiorange=(0.1, 1.0), redshift=None,
                        mag=None, vdisp=None, seed=None, input_meta=None, nocolorcuts=False,
                        nocontinuum=False, agnlike=False, novdisp=False, restframe=False,
-                       verbose=False):
+                       verbose=False, **kwargs):
         """Build Monte Carlo BGS spectra/templates.
 
          See the GALAXY.make_galaxy_templates function for documentation on the
@@ -969,7 +969,7 @@ class LRG(GALAXY):
                        logvdisp_meansig=(2.3, 0.1), sne_rfluxratiorange=(0.1, 1.0),
                        redshift=None, mag=None, vdisp=None, seed=None,
                        input_meta=None, nocolorcuts=False, novdisp=False, agnlike=False,
-                       restframe=False, verbose=False):
+                       restframe=False, verbose=False, **kwargs):
         """Build Monte Carlo BGS spectra/templates.
 
          See the GALAXY.make_galaxy_templates function for documentation on the
@@ -1376,7 +1376,7 @@ class STAR(SUPERSTAR):
     def make_templates(self, nmodel=100, vrad_meansig=(0.0, 200.0),
                        rmagrange=(18.0, 23.5), seed=None, redshift=None,
                        mag=None, input_meta=None, star_properties=None,
-                       restframe=False, verbose=False):
+                       restframe=False, verbose=False, **kwargs):
         """Build Monte Carlo spectra/templates for generic stars.
 
         See the SUPERSTAR.make_star_templates function for documentation on the
@@ -1437,7 +1437,7 @@ class FSTD(SUPERSTAR):
 
     def make_templates(self, nmodel=100, vrad_meansig=(0.0, 200.0), rmagrange=(16.0, 19.0),
                        seed=None, redshift=None, mag=None, input_meta=None, star_properties=None,
-                       nocolorcuts=False, restframe=False, verbose=False):
+                       nocolorcuts=False, restframe=False, verbose=False, **kwargs):
         """Build Monte Carlo spectra/templates for FSTD stars.
 
         See the SUPERSTAR.make_star_templates function for documentation on the
@@ -1498,7 +1498,7 @@ class MWS_STAR(SUPERSTAR):
 
     def make_templates(self, nmodel=100, vrad_meansig=(0.0, 200.0), rmagrange=(16.0, 20.0),
                        seed=None, redshift=None, mag=None, input_meta=None, star_properties=None,
-                       nocolorcuts=False, restframe=False, verbose=False):
+                       nocolorcuts=False, restframe=False, verbose=False, **kwargs):
         """Build Monte Carlo spectra/templates for MWS_STAR stars.
 
         See the SUPERSTAR.make_star_templates function for documentation on the
@@ -1556,7 +1556,7 @@ class WD(SUPERSTAR):
 
     def make_templates(self, nmodel=100, vrad_meansig=(0.0, 200.0), gmagrange=(16.0, 19.0),
                        seed=None, redshift=None, mag=None, input_meta=None, star_properties=None,
-                       nocolorcuts=False, restframe=False, verbose=False):
+                       nocolorcuts=False, restframe=False, verbose=False, **kwargs):
         """Build Monte Carlo spectra/templates for WD stars.
 
         See the SUPERSTAR.make_star_templates function for documentation on the
@@ -1705,7 +1705,7 @@ class QSO():
     def make_templates(self, nmodel=100, zrange=(0.5, 4.0), rmagrange=(20.0, 22.5),
                        seed=None, redshift=None, mag=None, input_meta=None, N_perz=40, 
                        maxiter=20, uniform=False, lyaforest=True, nocolorcuts=False,
-                       verbose=False):
+                       verbose=False, **kwargs):
         """Build Monte Carlo QSO spectra/templates.
 
         This function generates QSO spectra on-the-fly using PCA decomposition
