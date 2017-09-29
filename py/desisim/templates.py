@@ -1968,7 +1968,8 @@ def specify_galparams_dict(templatetype, zrange=None, magrange=None,
                             minlineflux=None, sne_rfluxratiorange=None,
                             redshift=None, mag=None, vdisp=None,
                             nocolorcuts=None, nocontinuum=None,
-                            agnlike=None, novdisp=None, restframe=None):
+                            agnlike=None, novdisp=None, restframe=None,
+                            add_SNeIa=False):
     
     '''
     Creates a dictionary of keyword variables to be passed to GALAXY.make_templates (or one
@@ -1982,7 +1983,7 @@ def specify_galparams_dict(templatetype, zrange=None, magrange=None,
         * minlineflux=0.0, sne_rfluxratiorange=(0.01, 0.1),
         * seed=None, redshift=None, mag=None, vdisp=None,
         * input_meta=None, nocolorcuts=False, nocontinuum=False,
-        * agnlike=False, novdisp=False, restframe=False, verbose=False
+        * agnlike=False, add_SNeIa=False, novdisp=False, restframe=False, verbose=False
 
     Args:
         
@@ -2029,6 +2030,7 @@ def specify_galparams_dict(templatetype, zrange=None, magrange=None,
         * agnlike (bool, optional): Adopt AGN-like emission-line ratios (e.g.,
             for the LRGs and some BGS galaxies) (default False, meaning we adopt
             star-formation-like line-ratios).  Option not yet supported.
+        * add_SNeIa (bool, optional): Optionally include Type Ia SNe spectra.
         * restframe (bool, optional): If True, return full resolution restframe
             templates instead of resampled observer frame.
         * verbose (bool, optional): Be verbose!
@@ -2069,6 +2071,8 @@ def specify_galparams_dict(templatetype, zrange=None, magrange=None,
         fulldef_dict['nocontinuum'] = nocontinuum
     if agnlike is not None:
         fulldef_dict['agnlike'] = agnlike
+    if add_SNeIa is not None:
+        fulldef_dict['add_SNeIa'] = add_SNeIa
     if novdisp is not None:
         fulldef_dict['novdisp'] = novdisp
     if restframe is not None:
