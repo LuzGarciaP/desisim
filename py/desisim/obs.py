@@ -446,7 +446,6 @@ def update_obslog(obstype='science', program='DARK', expid=None, dateobs=None,
     INSERT OR REPLACE INTO obslog(expid,dateobs,night,obstype,program,tileid,ra,dec)
     VALUES (?,?,?,?,?,?,?,?)
     """
-    import pdb ; pdb.set_trace()
     db.execute(insert, (expid, time.mktime(dateobs), night, obstype.upper(), program.upper(), tileid, ra, dec))
     db.commit()
 
