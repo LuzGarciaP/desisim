@@ -210,7 +210,8 @@ def new_exposure(program, nspec=5000, night=None, expid=None, tileid=None,
     desispec.io.write_fibermap(fiberfile, fibermap, header=hdr)
     log.info('Wrote '+fiberfile)
 
-    update_obslog(obstype='science', program=program, expid=expid, dateobs=dateobs, tileid=tileid)
+    print('Commenting out update_obslog!!!')
+    #update_obslog(obstype='science', program=program, expid=expid, dateobs=dateobs, tileid=tileid)
 
     #- Restore $DESI_SPECTRO_DATA
     if datadir_orig is not None:
